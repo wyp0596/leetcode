@@ -1,11 +1,47 @@
-package leetcode_test
+package leetcode
 
 import (
 	"testing"
-	"strconv"
 )
 
-func TestMerge(t *testing.T) {
+// Merge two sorted linked lists and return it as a new list.
+// The new list should be made by splicing together the nodes of the first two lists.
+// https://leetcode.com/problems/merge-two-sorted-lists/
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+	var result *ListNode
+	if l1.Val < l2.Val {
+		result = l1
+		l1 = l1.Next
+	} else {
+		result = l2
+		l2 = l2.Next
+	}
+	current := result
+	for l1 != nil {
+		if l2 != nil && l1.Val > l2.Val {
+			current.Next = l2
+			current = l2
+			l2 = l2.Next
+			continue
+		}
+		current.Next = l1
+		current = l1
+		l1 = l1.Next
+	}
+	if l2 != nil {
+		current.Next = l2
+	}
+
+	return result
+}
+
+func Test21(t *testing.T) {
 
 	var lists = []struct {
 		l1     *ListNode
@@ -51,58 +87,4 @@ func TestMerge(t *testing.T) {
 	}
 	t.Log("End Tests")
 
-}
-
-// Definition for singly-linked list.
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func (l *ListNode)String() string {
-	s := l
-	r := "["
-	for s != nil {
-		r += " " + strconv.Itoa(s.Val)
-		s = s.Next
-	}
-	r += " ]"
-	return r
-}
-
-// Merge two sorted linked lists and return it as a new list.
-// The new list should be made by splicing together the nodes of the first two lists.
-// https://leetcode.com/problems/merge-two-sorted-lists/
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil {
-		return l2
-	}
-	if l2 == nil {
-		return l1
-	}
-	var result *ListNode
-	if l1.Val < l2.Val {
-		result = l1
-		l1 = l1.Next
-	} else {
-		result = l2
-		l2 = l2.Next
-	}
-	current := result
-	for l1 != nil {
-		if l2 != nil && l1.Val > l2.Val {
-			current.Next = l2
-			current = l2
-			l2 = l2.Next
-			continue
-		}
-		current.Next = l1
-		current = l1
-		l1 = l1.Next
-	}
-	if l2 != nil {
-		current.Next = l2
-	}
-
-	return result
 }
