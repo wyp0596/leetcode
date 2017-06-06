@@ -15,7 +15,6 @@ import (
 //Given n will always be valid.
 //Try to do this in one pass.
 //https://leetcode.com/problems/remove-nth-node-from-end-of-list/#/description
-
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	temp := head
 	list := []*ListNode{}
