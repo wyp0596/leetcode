@@ -30,7 +30,7 @@ func maxArea(height []int) int {
 			value = (r - l) * height[l]
 			l++
 		}
-		// 判断是非是最大面积
+		// 判断是否最大面积
 		if max < value {
 			max = value
 		}
