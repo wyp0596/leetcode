@@ -3,7 +3,6 @@ package leetcode
 import (
 	"testing"
 	"strings"
-	"sort"
 )
 
 //Write a function to find the longest common prefix string amongst an array of strings.
